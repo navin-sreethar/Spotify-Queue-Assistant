@@ -1,0 +1,31 @@
+{
+  "total_submissions": 3,
+  "popular_tracks": {
+    "Master of Puppets (Remastered) - Metallica": 1,
+    "Sweet Child O' Mine - Guns N' Roses": 1,
+    "Paradise City - Guns N' Roses": 1
+  },
+  "popular_artists": {
+    "Metallica": 1,
+    "Guns N' Roses": 2
+  },
+  "recent_activity": [
+    {
+      "track": "Master of Puppets (Remastered) - Metallica",
+      "timestamp": "2025-08-28T18:45:27.104283",
+      "popularity": 73
+    },
+    {
+      "track": "Sweet Child O' Mine - Guns N' Roses",
+      "timestamp": "2025-08-28T18:45:57.002306",
+      "popularity": 87
+    },
+    {
+      "track": "Paradise City - Guns N' Roses",
+      "timestamp": "2025-08-28T18:49:27.243434",
+      "popularity": 82
+    }
+  ],
+  "duplicate_prevention": 5,
+  "recommendations_given": 0
+}

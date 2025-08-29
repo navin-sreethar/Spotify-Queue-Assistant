@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Queue Assistant</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #1db954, #191414);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #1db954;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #1db954;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #1db954;
+            box-shadow: 0 0 10px rgba(29, 185, 84, 0.3);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #1db954, #1ed760);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        .help-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #b3b3b3;
+            line-height: 1.5;
+        }
+        .example {
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .message {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .success {
+            background: rgba(29, 185, 84, 0.2);
+            border: 1px solid #1db954;
+            color: #1db954;
+        }
+        .error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+        }
+        .info {
+            background: rgba(52, 152, 219, 0.2);
+            border: 1px solid #3498db;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Spotify Queue Assistant</h1>
+        <p class="subtitle">Add your favourite songs to my queue</p>
+        
+        {% if message %}
+            <div class="message {{ message_type }}">
+                {{ message }}
+                {% if auth_url %}
+                    <br><br>
+                    <a href="{{ auth_url }}" style="color: #1db954; text-decoration: none; font-weight: bold;">
+                        🔐 Click here to authenticate with Spotify
+                    </a>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="query">Song or Spotify Link:</label>
+                <input 
+                    type="text" 
+                    id="query" 
+                    name="query" 
+                    placeholder="Enter a song name, artist, or paste a Spotify link..."
+                    value="{{ query or '' }}"
+                    required
+                >
+                <div class="help-text">
+                    <strong>You can enter:</strong>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Song name: "Bohemian Rhapsody"</li>
+                        <li>Artist and song: "Queen - Bohemian Rhapsody"</li>
+                        <li>Spotify track link: https://open.spotify.com/track/...</li>
+                        <li>Spotify URI: spotify:track:...</li>
+                    </ul>
+                    
+                    <div class="example">
+                        <strong>Examples:</strong><br>
+                        • "Blinding Lights The Weeknd"<br>
+                        • "https://open.spotify.com/track/0VjIjW4GlULA4LGoDOLVTL"<br>
+                        • "spotify:track:0VjIjW4GlULA4LGoDOLVTL"
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                🎶 Add to Queue
+            </button>
+        </form>
+    </div>
+</body>
+</html>
